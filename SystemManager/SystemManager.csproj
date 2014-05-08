@@ -32,9 +32,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LinuxManagement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemManagement.cs" />
+    <Compile Include="WindowsManagement.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="info.txt" />
