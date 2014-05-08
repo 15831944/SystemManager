@@ -1,0 +1,10 @@
+﻿
+Create junction point for Visual Studio on Windows 8:
+
+cd %userprofile%
+mklink /j "Source" "D:\Git\Source"
+
+==>
+Verbindung erstellt für Source <<===>> D:\Git\Source
+
+
