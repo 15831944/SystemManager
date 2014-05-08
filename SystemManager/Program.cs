@@ -12,6 +12,9 @@ namespace SystemManager
 
         public static void Main(string[] args)
         {
+			SystemManagement sys = new LinuxManagement();
+			sys.Restart();
+
             Console.WriteLine("Hello World!");
         } // End Sub Main
 
