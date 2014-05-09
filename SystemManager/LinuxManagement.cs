@@ -13,8 +13,13 @@ namespace SystemManager
 
         private const string LibcIsAFreakingTextFile = @"/lib/x86_64-linux-gnu/libc.so.6";
 
-        [System.Runtime.InteropServices.DllImport(LibcIsAFreakingTextFile)]
-        private static extern int reboot(RebootFlags cmd);
+		[System.Runtime.InteropServices.DllImport(LibcIsAFreakingTextFile)]
+		private static extern int reboot(RebootFlags cmd);
+
+		// http://linux.die.net/man/2/sync
+		// sync, syncfs - commit buffer cache to disk
+		[System.Runtime.InteropServices.DllImport(LibcIsAFreakingTextFile)]
+		private static extern void sync();
 
 
         public enum RebootFlags : uint
@@ -78,10 +83,24 @@ namespace SystemManager
 
 
 
+		public virtual void Shutdown()
+		{
+			sync();
+			reboot(RebootFlags.LINUX_REBOOT_CMD_POWER_OFF);
+		}
+
+
+		public override void SuspendHibernate()
+		{ 
+			sync();
+			reboot(RebootFlags.LINUX_REBOOT_CMD_SW_SUSPEND);
+		}
+
+
         public override void Restart()
         {
             // http://stackoverflow.com/questions/2678766/how-to-restart-linux-from-inside-a-c-program
-            //sync();
+            sync();
             //setuid (0);
             reboot(RebootFlags.LINUX_REBOOT_CMD_RESTART);
 

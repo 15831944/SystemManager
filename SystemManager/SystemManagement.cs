@@ -39,7 +39,7 @@ namespace SystemManager
         }
 
 
-        public virtual void Hibernate()
+		public virtual void SuspendHibernate()
         { 
 			throw new NotImplementedException ();
 		}
