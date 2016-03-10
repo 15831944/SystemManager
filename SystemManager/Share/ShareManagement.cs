@@ -26,18 +26,24 @@ namespace SimpleTests
 
         public static System.Collections.Generic.List<Share> ListShares()
         {
-            System.Console.WriteLine(System.Environment.NewLine + "Shares on local computer:");
             System.Collections.Generic.List<Share> ls = new System.Collections.Generic.List<Share>();
 
-            ShareCollection shi = ShareCollection.LocalShares;
-            if (shi == null)
-                return ls;
-
-            foreach (Share si in shi)
+            try
             {
-                System.Console.WriteLine("{0}: {1} [{2}]", si.ShareType, si, si.Path);
-                ls.Add(si);
-            } // Next si 
+                ShareCollection shi = ShareCollection.LocalShares;
+                if (shi == null)
+                    return ls;
+
+                foreach (Share si in shi)
+                    ls.Add(si);
+            }
+            catch (System.Exception ex)
+            {
+                // Silently ignore errors. Just don't crash.
+                System.Diagnostics.Debug.WriteLine(System.Environment.NewLine);
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                System.Diagnostics.Debug.WriteLine(ex.StackTrace);
+            }
 
             return ls;
         } // End Function ListShares 
